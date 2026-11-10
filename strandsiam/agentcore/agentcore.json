@@ -1,0 +1,24 @@
+{
+  "name": "strandsiam",
+  "version": 2,
+  "managedBy": "CDK",
+  "runtimes": [
+    {
+      "name": "agent",
+      "build": "CodeZip",
+      "modelProvider": "Bedrock",
+      "entrypoint": "main.py",
+      "codeLocation": "app/agent",
+      "runtimeVersion": "PYTHON_3_14",
+      "protocol": "A2A",
+      "envVars": [
+        {
+          "name": "BEDROCK_MODEL_ID",
+          "value": "us.amazon.nova-micro-v1:0"
+        }
+      ],
+      "authorizerType": "AWS_IAM"
+    }
+  ],
+  "memories": []
+}

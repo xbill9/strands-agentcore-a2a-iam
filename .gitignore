@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+# account-specific AgentCore state stays local
+strandsiam/agentcore/aws-targets.json
+strandsiam/agentcore/.cli/
+strandsiam/agentcore/.env.local
+strandsiam/agentcore/.cache/
+strandsiam/agentcore/cdk/cdk.out/
