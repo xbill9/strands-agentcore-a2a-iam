@@ -41,8 +41,10 @@ Every figure in the article comes from these result files.
 
 #### Step 4 — Qualify and submit (you do these on Builder Center)
 
-- [ ] Builder Center profile complete: name, profile picture, bio
-- [ ] One badge unlocked: Conversation Starter, Valued Creator, Meaningful Contributor or Idea Influencer
+- [x] Builder Center profile complete: name, profile picture, bio
+- [x] One badge unlocked: Conversation Starter, Valued Creator, Meaningful Contributor or Idea Influencer
 - [x] Article published on Builder Center
-- [ ] Submitted in the Speed Run Space
-- [ ] Pulse form completed
+- [x] Submitted in the Speed Run Space
+- [x] Pulse form completed
+
+Submitted 2026-11-16. Badge: Valued Creator (unlocked 2026-10-07). Space post: https://builder.aws.com/post/3MCl7r2yAZlvLH0gMdvfYKkW1QT_p/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential
