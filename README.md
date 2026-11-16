@@ -2,7 +2,9 @@
 
 A Strands currency worker served over A2A on Amazon Bedrock AgentCore Runtime, and a
 local Strands coordinator that calls it. Every request is signed with SigV4 from the
-caller's IAM role; the access rule is one policy on one runtime ARN.
+caller's IAM role; the access rule is one policy on one runtime ARN: `InvokeAgentRuntime` and
+`GetAgentCard` on the runtime and its endpoints (both actions are checked against
+`<runtime ARN>/runtime-endpoint/DEFAULT`, so the bare ARN alone is refused).
 
 | Path | What it is |
 |---|---|
@@ -21,11 +23,12 @@ caller's IAM role; the access rule is one policy on one runtime ARN.
 ```bash
 pip install 'strands-agents[a2a]' 'bedrock-agentcore[a2a]' boto3 httpx
 npm install -g @aws/agentcore
-cd strandsiam && agentcore deploy -y && cd ..          # prints the runtime ARN
+(cd strandsiam/agentcore/cdk && npm ci)                # CDK deps, once per clone
+(cd strandsiam && agentcore deploy --yes --region us-east-1 && agentcore status --region us-east-1)  # status prints the runtime ARN
 export WORKER_RUNTIME_ARN=arn:aws:bedrock-agentcore:...
-iam/setup_roles.sh
+iam/setup_roles.sh      # trusts you; as root, set CALLER_PRINCIPAL to a non-root user's ARN
 python3 -m caller.ask "Convert 250 USD to EUR and JPY"
 python3 -m caller.coordinator "I have 1200 USD. What is that in EUR and JPY?"
-python3 -m bench.boundary
+python3 -m bench.boundary                             # benches assume roles: run as non-root (e.g. AWS_PROFILE=speedrun-operator)
 python3 -m bench.latency --runs 10
 ```

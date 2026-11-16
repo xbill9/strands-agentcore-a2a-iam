@@ -1,6 +1,6 @@
 ---
 name: teardown
-description: Remove the deployed AgentCore worker stack in us-east-1 and delete the three speedrun-caller-* IAM roles.
+description: Remove the deployed AgentCore worker stack in us-east-1, delete the three speedrun-caller-* IAM roles and the speedrun-operator IAM user and AWS profile.
 disable-model-invocation: true
 ---
 
@@ -26,4 +26,14 @@ Tear down everything a speed-run pass created. Show the user what will be delete
      aws iam delete-role --role-name "$r"
    done
    ```
-4. Re-run the step-1 inventory and report what remains.
+4. Delete the operator user and its profile:
+   ```
+   u=speedrun-operator
+   for k in $(aws iam list-access-keys --user-name $u --query 'AccessKeyMetadata[].AccessKeyId' --output text); do
+     aws iam delete-access-key --user-name $u --access-key-id "$k"
+   done
+   aws iam delete-user-policy --user-name $u --policy-name assume-speedrun-callers
+   aws iam delete-user --user-name $u
+   ```
+   Then remove the `[speedrun-operator]` sections from `~/.aws/credentials` and `~/.aws/config`.
+5. Re-run the step-1 inventory (plus `aws iam get-user --user-name speedrun-operator`) and report what remains.

@@ -1,0 +1,83 @@
+{
+  "runtime_arn": "arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b",
+  "region": "us-east-1",
+  "question": "Convert 100 USD to EUR",
+  "cases": [
+    {
+      "status": 200,
+      "seconds": 2.5766,
+      "request_id": "73883e92-41e9-4925-9801-7d5cb0ab651d",
+      "body": "{\"capabilities\":{\"streaming\":true},\"defaultInputModes\":[\"text\"],\"defaultOutputModes\":[\"text\"],\"description\":\"A Bedrock AgentCore agent\",\"name\":\"agent\",\"preferredTransport\":\"JSONRPC\",\"protocolVersion\":\"0.3.0\",\"skills\":[{\"description\":\"A Bedrock AgentCore agent\",\"id\":\"main\",\"name\":\"agent\",\"tags\":[\"main\"]}],\"url\":\"https://bedrock-agentcore.us-east-1.amazonaws.com/runtimes/arn%3Aaws%3Abedrock-agentcore%3Aus-east-1%3AACCOUNT_ID%3Aruntime%2Fstrandsiam_default_agent-lv6O7Y6g5b/invocations\",\"version\":\"0.1.0\"}",
+      "case": "invoke role, card"
+    },
+    {
+      "status": 200,
+      "seconds": 3.3657,
+      "request_id": "890c39b0-f622-4ae9-990b-bc0c6c585e29",
+      "body": "{\"id\":\"4440916b-f61a-4e91-8530-8eb4e1d917c9\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"4e2e6d67-d638-40c5-9df7-163d826f5f09\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"The conversion of 100 USD to EUR results in 90.79 EUR as of the rate date 2026-11-16. \\n\\n<thinking> I need to format the result in a clear and concise manner for the user </thinking> Here is the conversion result: \\n\\n100 USD = 90.79 EUR\\n\"}]}],\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"history\":[{\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"kind\":\"message\",\"messageId\":\"c0ecfdf1-ff29-45a2-b018-51927ac5e196\",\"parts\":[{\"kind\":\"text\",\"text\":\"Convert 100 USD to EUR\"}],\"role\":\"user\",\"taskId\":\"8ed02178-b856-4ac3-bd82-63fdb838b046\"},{\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"kind\":\"message\",\"messageId\":\"e6443230-35a3-45f9-b28e-a8410ade8c0e\",\"parts\":[{\"kind\":\"text\",\"text\":\"<thinking\"}],\"role\":\"agent\",\"taskId\":\"8ed02178-b856-4ac3-bd82-63fdb838b046\"},{\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"kind\":\"message\",\"messageId\":\"c09d9e81-6162-423c-a834-901aea278a6b\",\"parts\":[{\"kind\":\"text\",\"text\":\">\"}],\"role\":\"agent\",\"taskId\":\"8ed02178-b856-4ac3-bd82-63fdb838b046\"},{\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"kind\":\"message\",\"messageId\":\"b6dddb5b-c5a3-45de-ac21-8de68b24cbbe\",\"parts\":[{\"kind\":\"text\",\"text\":\" The\"}],\"role\":\"agent\",\"taskId\":\"8ed02178-b856-4ac3-bd82-63fdb838b046\"},{\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"kind\":\"message\",\"messageId\":\"24159e23-b89d-41b2-bd6d-ffbb42043e6c\",\"parts\":[{\"kind\":\"text\",\"text\":\" user\"}],\"role\":\"agent\",\"taskId\":\"8ed02178-b856-4ac3-bd82-63fdb838b046\"},{\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"kind\":\"message\",\"messageId\":\"7df17c77-d05d-4a02-992b-a43f9af85144\",\"parts\":[{\"kind\":\"text\",\"text\":\" wants\"}],\"role\":\"agent\",\"taskId\":\"8ed02178-b856-4ac3-bd82-63fdb838b046\"},{\"contextId\":\"b170ab16-bff1-49f7-9d11-98e9d6097730\",\"kind\":\"message\",\"messageId\":\"32063fb1-4c70-4b38-8336-9f6fc3e821d1\",\"parts\":[{\"ki",
+      "case": "invoke role, message"
+    },
+    {
+      "status": 403,
+      "seconds": 0.1369,
+      "request_id": "ccb63d0b-642d-4650-b4ce-ef7293f0dcd1",
+      "body": "{\"message\":\"User: arn:aws:sts::ACCOUNT_ID:assumed-role/speedrun-caller-runtime-only/speedrun is not authorized to perform: bedrock-agentcore:GetAgentCard on resource: arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b because no identity-based policy allows the bedrock-agentcore:GetAgentCard action\"}",
+      "case": "runtime-only role, card"
+    },
+    {
+      "status": 403,
+      "seconds": 0.1513,
+      "request_id": "26a29374-b8aa-4b49-8d90-936dae2e533c",
+      "body": "{\"message\":\"User: arn:aws:sts::ACCOUNT_ID:assumed-role/speedrun-caller-runtime-only/speedrun is not authorized to perform: bedrock-agentcore:InvokeAgentRuntime on resource: arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b/runtime-endpoint/DEFAULT because no identity-based policy allows the bedrock-agentcore:InvokeAgentRuntime action\"}",
+      "case": "runtime-only role, message"
+    },
+    {
+      "status": 403,
+      "seconds": 0.1461,
+      "request_id": "71dd43c0-6e34-4a64-9c84-5b0b8c55b996",
+      "body": "{\"message\":\"User: arn:aws:sts::ACCOUNT_ID:assumed-role/speedrun-caller-none/speedrun is not authorized to perform: bedrock-agentcore:GetAgentCard on resource: arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b because no identity-based policy allows the bedrock-agentcore:GetAgentCard action\"}",
+      "case": "no-permission role, card"
+    },
+    {
+      "status": 403,
+      "seconds": 0.1486,
+      "request_id": "4b11af26-ea4f-4efa-a3bf-3380e2af52cb",
+      "body": "{\"message\":\"User: arn:aws:sts::ACCOUNT_ID:assumed-role/speedrun-caller-none/speedrun is not authorized to perform: bedrock-agentcore:InvokeAgentRuntime on resource: arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b because no identity-based policy allows the bedrock-agentcore:InvokeAgentRuntime action\"}",
+      "case": "no-permission role, message"
+    },
+    {
+      "status": 403,
+      "seconds": 0.1336,
+      "request_id": "5118cfc1-ac11-4e09-94fa-862f623462ee",
+      "body": "{\"message\":\"Missing Authentication Token\"}",
+      "case": "unsigned, card"
+    },
+    {
+      "status": 403,
+      "seconds": 0.2206,
+      "request_id": "5240fa02-377b-49fd-9e05-e409a27c7ef4",
+      "body": "{\"message\":\"Missing Authentication Token\"}",
+      "case": "unsigned, message"
+    },
+    {
+      "status": 403,
+      "seconds": 0.22,
+      "request_id": "6d01da57-43f0-4923-bb2e-bda6b5532f9b",
+      "body": "{\"message\":\"Credential should be scoped to correct service: 'bedrock-agentcore'. \"}",
+      "case": "invoke role, signed for service 'bedrock'"
+    },
+    {
+      "status": 403,
+      "seconds": 0.1484,
+      "request_id": "a0515603-a0bc-4be7-9f84-c1e7e2e0294a",
+      "body": "{\"message\":\"User: arn:aws:sts::ACCOUNT_ID:assumed-role/speedrun-caller-invoke/speedrun is not authorized to perform: bedrock-agentcore:InvokeAgentRuntime on resource: arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/speedrunMissing-0000000000 because no identity-based policy allows the bedrock-agentcore:InvokeAgentRuntime action\"}",
+      "case": "invoke role, runtime outside the policy"
+    }
+  ],
+  "versions": {
+    "strands-agents": "1.64.0",
+    "a2a-sdk": "0.3.26",
+    "botocore": "1.43.118",
+    "httpx": "0.28.1"
+  }
+}

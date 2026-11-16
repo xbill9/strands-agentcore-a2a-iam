@@ -8,21 +8,22 @@ Bar: a new article on AWS Builder Center that teaches how to implement, not just
 ```bash
 pip install 'strands-agents[a2a]' 'bedrock-agentcore[a2a]' boto3 httpx
 npm install -g @aws/agentcore
-cd strandsiam && agentcore deploy -y && cd ..          # prints the runtime ARN
+(cd strandsiam/agentcore/cdk && npm ci)                # CDK deps, once per clone
+(cd strandsiam && agentcore deploy --yes --region us-east-1 && agentcore status --region us-east-1)  # status prints the runtime ARN
 export WORKER_RUNTIME_ARN=arn:aws:bedrock-agentcore:...
-iam/setup_roles.sh
+iam/setup_roles.sh      # trusts you; as root, set CALLER_PRINCIPAL to a non-root user's ARN
 python3 -m caller.ask "Convert 250 USD to EUR and JPY"
 python3 -m caller.coordinator "I have 1200 USD. What is that in EUR and JPY?"
-python3 -m bench.boundary
+python3 -m bench.boundary                             # benches assume roles: run as non-root (e.g. AWS_PROFILE=speedrun-operator)
 python3 -m bench.latency --runs 10
 ```
 
-- [ ] Deploy and export the runtime ARN
-- [ ] Set up the caller roles
-- [ ] Run `caller.ask` and `caller.coordinator` once each
-- [ ] Run `bench.boundary`, which records allowed and refused calls exactly as returned
-- [ ] Run `bench.latency --runs 10` for cold and warm session latency and signing time
-- [ ] Confirm `results/` holds the JSON with the account ID redacted, then commit it
+- [x] Deploy and export the runtime ARN
+- [x] Set up the caller roles
+- [x] Run `caller.ask` and `caller.coordinator` once each
+- [x] Run `bench.boundary`, which records allowed and refused calls exactly as returned
+- [x] Run `bench.latency --runs 10` for cold and warm session latency and signing time
+- [x] Confirm `results/` holds the JSON with the account ID redacted, then commit it
 
 Every figure in the article comes from these result files.
 

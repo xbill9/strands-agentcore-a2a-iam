@@ -25,6 +25,9 @@ SYSTEM_PROMPT = (
 
 async def run(question: str) -> str:
     worker, http, _ = remote_worker()
+    # Strands runs a turn's tool calls concurrently, but an AgentCore runtime
+    # session takes one request at a time (a second one gets 409 Conflict).
+    one_at_a_time = asyncio.Lock()
 
     @tool
     async def ask_currency_worker(request: str) -> str:
@@ -33,10 +36,13 @@ async def run(question: str) -> str:
         Args:
             request: A plain-language conversion request with amount and currencies.
         """
-        return str(await worker.invoke_async(request))
+        async with one_at_a_time:
+            return str(await worker.invoke_async(request))
 
     coordinator = Agent(
-        model=BedrockModel(model_id=os.getenv("BEDROCK_MODEL_ID", "us.amazon.nova-micro-v1:0")),
+        model=BedrockModel(
+            model_id=os.getenv("BEDROCK_MODEL_ID", "us.amazon.nova-micro-v1:0")
+        ),
         system_prompt=SYSTEM_PROMPT,
         tools=[ask_currency_worker],
         callback_handler=None,

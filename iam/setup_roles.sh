@@ -9,13 +9,15 @@
 # speedrun-caller-none          no permissions
 #
 # The trust policy names the IAM role you are running as, so only you can assume them.
+# Set CALLER_PRINCIPAL to trust a different principal instead (needed when you run
+# this as the root user, which AWS does not allow to assume roles).
 set -euo pipefail
 : "${WORKER_RUNTIME_ARN:?set WORKER_RUNTIME_ARN}"
 here="$(cd "$(dirname "$0")" && pwd)"
 region="$(cut -d: -f4 <<<"$WORKER_RUNTIME_ARN")"
 account="$(cut -d: -f5 <<<"$WORKER_RUNTIME_ARN")"
 
-me="$(aws sts get-caller-identity --query Arn --output text)"
+me="${CALLER_PRINCIPAL:-$(aws sts get-caller-identity --query Arn --output text)}"
 if [[ "$me" == arn:aws:sts::*:assumed-role/* ]]; then
   role_name="$(cut -d/ -f2 <<<"$me")"
   principal="$(aws iam get-role --role-name "$role_name" --query Role.Arn --output text)"
@@ -32,6 +34,7 @@ for role in speedrun-caller-invoke speedrun-caller-runtime-only speedrun-caller-
   aws iam get-role --role-name "$role" >/dev/null 2>&1 ||
     aws iam create-role --role-name "$role" --assume-role-policy-document "$trust" \
       --max-session-duration 3600 --query Role.Arn --output text
+  aws iam update-assume-role-policy --role-name "$role" --policy-document "$trust"
 done
 
 aws iam put-role-policy --role-name speedrun-caller-invoke \
