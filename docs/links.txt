@@ -2,5 +2,5 @@ devto-aws = https://dev.to/aws-builders/strands-to-strands-over-a2a-on-bedrock-a
 medium = https://medium.com/@xbill999/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential-374e2edba687
 builder = https://builder.aws.com/content/3MCgrxHGYMJuGCP8aC9Ks07DQAC/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential
 substack = https://xbill9.substack.com/p/strands-to-strands-over-a2a-on-bedrock
-linkedin = PENDING
+linkedin = https://www.linkedin.com/feed/update/urn:li:activity:7528197030465392640/
 repo = https://github.com/xbill9/strands-agentcore-a2a-iam
