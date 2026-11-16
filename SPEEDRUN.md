@@ -29,14 +29,14 @@ Every figure in the article comes from these result files.
 
 #### Step 2 — Draft the article (publishing skill)
 
-- [ ] Builder Center format, in the dev.to voice: `Step N —` sections, `🔎 Tip:`, Compare and Contrast, `So, Which One?`, 🟢 ❌ ⚠️ summary, Scope paragraph, closing, `#### References`
-- [ ] Walk the build step by step: deploy the worker, turn on IAM inbound auth, SigV4 signing (`caller/sigv4.py`), the `A2AAgent` wrapper (`caller/worker.py`), the single-ARN policy (`iam/invoke-policy.json`)
-- [ ] Results: the access-test table and the latency numbers, taken from `results/`
+- [x] Builder Center format, in the dev.to voice: `Step N —` sections, `🔎 Tip:`, Compare and Contrast, `So, Which One?`, 🟢 ❌ ⚠️ summary, Scope paragraph, closing, `#### References`
+- [x] Walk the build step by step: deploy the worker, turn on IAM inbound auth, SigV4 signing (`caller/sigv4.py`), the `A2AAgent` wrapper (`caller/worker.py`), the single-ARN policy (`iam/invoke-policy.json`)
+- [x] Results: the access-test table and the latency numbers, taken from `results/`
 
 #### Step 3 — Cover image and preflight
 
-- [ ] Make the cover image
-- [ ] Run the preflight check (it also checks the prose)
+- [x] Make the cover image
+- [x] Run the preflight check (it also checks the prose)
 - [ ] Optional: post the draft in #cb-speed-run-2 for feedback
 
 #### Step 4 — Qualify and submit (you do these on Builder Center)
