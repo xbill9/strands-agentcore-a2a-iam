@@ -1,0 +1,16 @@
+Strands to Strands over A2A on Bedrock AgentCore, With IAM as the Only Credential
+
+A Strands currency worker served over A2A on Amazon Bedrock AgentCore Runtime with IAM inbound auth, a SigV4-signed Strands caller and coordinator, a one-runtime IAM policy, and measured access checks, session latency and concurrency.
+
+What is in it:
+
+- 🟢 One IAM role signed the caller's A2A calls and the coordinator's Bedrock calls, with no other credential anywhere.
+- 🟢 Of 10 boundary calls, 2 were allowed and 8 were refused, each refusal naming the action and resource.
+- 🟢 A reused session read the card in a median 0.244 s against 1.758 s for a new one, p = 0.000183.
+- ❌ A policy on the bare runtime ARN alone is refused for both actions, at runtime-endpoint/DEFAULT.
+
+dev.to (AWS Community Builders): https://dev.to/aws-builders/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential-19hp
+AWS Builder Center: https://builder.aws.com/content/3MCgrxHGYMJuGCP8aC9Ks07DQAC/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential
+Medium: https://medium.com/@xbill999/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential-374e2edba687
+Substack: https://xbill9.substack.com/p/strands-to-strands-over-a2a-on-bedrock
+GitHub: https://github.com/xbill9/strands-agentcore-a2a-iam
