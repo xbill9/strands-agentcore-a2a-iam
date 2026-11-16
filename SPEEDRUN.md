@@ -48,3 +48,4 @@ Every figure in the article comes from these result files.
 - [x] Pulse form completed
 
 Submitted 2026-11-16. Badge: Valued Creator (unlocked 2026-10-07). Space post: https://builder.aws.com/post/3MCl7r2yAZlvLH0gMdvfYKkW1QT_p/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential
+Findings posted in #cb-speed-run-2 on 2026-11-16 (channel C0CFL29RD1U).

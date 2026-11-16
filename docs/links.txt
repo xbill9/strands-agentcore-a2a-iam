@@ -4,4 +4,3 @@ builder = https://builder.aws.com/content/3MCgrxHGYMJuGCP8aC9Ks07DQAC/strands-to
 substack = https://xbill9.substack.com/p/strands-to-strands-over-a2a-on-bedrock
 linkedin = https://www.linkedin.com/feed/update/urn:li:activity:7528197030465392640/
 repo = https://github.com/xbill9/strands-agentcore-a2a-iam
-slack = https://app.slack.com/client/E08R531Q42K/C0CFL29RD1U
