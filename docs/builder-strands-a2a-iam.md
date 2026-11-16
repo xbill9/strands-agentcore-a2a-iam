@@ -421,9 +421,9 @@ The strategy for connecting Strands agents over A2A on AgentCore with IAM was va
 
 #### References
 
-- Repository: https://github.com/xbill9/strands-agentcore-a2a-iam
-- Amazon Bedrock AgentCore Developer Guide: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html
-- Strands Agents: https://strandsagents.com/
-- Agent2Agent protocol: https://a2a-protocol.org/
-- Signature Version 4 for API requests: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
-- Frankfurter exchange rates API: https://frankfurter.dev/
+- [Repository](https://github.com/xbill9/strands-agentcore-a2a-iam)
+- [Amazon Bedrock AgentCore Developer Guide](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html)
+- [Strands Agents](https://strandsagents.com/)
+- [Agent2Agent protocol](https://a2a-protocol.org/)
+- [Signature Version 4 for API requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html)
+- [Frankfurter exchange rates API](https://frankfurter.dev/)
