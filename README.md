@@ -16,6 +16,8 @@ caller's IAM role; the access rule is one policy on one runtime ARN: `InvokeAgen
 | `iam/` | caller roles and policies, scoped to the runtime ARN |
 | `bench/boundary.py` | one call per identity and request shape, status and body recorded verbatim |
 | `bench/latency.py` | cold and warm session latency, signing time |
+| `bench/session.py` | two requests at once, on one runtime session and on two |
+| `docs/` | the article (dev.to and Builder Center), its cover, `evidence/` and `audit_stats.py` |
 | `results/` | every run's JSON (account ID redacted) |
 
 ## Run
@@ -31,4 +33,6 @@ python3 -m caller.ask "Convert 250 USD to EUR and JPY"
 python3 -m caller.coordinator "I have 1200 USD. What is that in EUR and JPY?"
 python3 -m bench.boundary                             # benches assume roles: run as non-root (e.g. AWS_PROFILE=speedrun-operator)
 python3 -m bench.latency --runs 10
+python3 -m bench.session --pairs 5
+python3 docs/audit_stats.py                           # recomputes the article's figures from docs/evidence/
 ```

@@ -3,7 +3,7 @@
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": "bedrock-agentcore:InvokeAgentRuntime",
+      "Action": ["bedrock-agentcore:InvokeAgentRuntime", "bedrock-agentcore:GetAgentCard"],
       "Resource": "__RUNTIME_ARN__"
     }
   ]

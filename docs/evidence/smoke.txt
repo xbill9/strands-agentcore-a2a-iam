@@ -1,0 +1,22 @@
+# smoke tests, signed as speedrun-caller-invoke, 2026-11-16T19:48:50Z
+arn:aws:sts::ACCOUNT_ID:assumed-role/speedrun-caller-invoke/smoke
+$ python3 -m caller.ask "Convert 250 USD to EUR and JPY"
+card: name='agent' url=https://bedrock-agentcore.us-east-1.amazonaws.com/runtimes/arn%3Aaws%3Abedrock-agentcore%3Aus-east-1%3AACCOUNT_ID%3Aruntime%2Fstrandsiam_default_agent-lv6O7Y6g5b/invocations  (2.21 s)
+answer (1.50 s):
+Here is the result of your currency conversion:
+
+- **250 USD** converts to **226.98 EUR**
+- **250 USD** converts to **39,900.00 JPY**
+
+The conversion rates are based on the date November 16, 2026.
+
+
+signed 2 requests, 2.27 ms signing in total
+$ python3 -m caller.coordinator "I have 1200 USD. What is that in EUR and JPY?"
+Here is the conversion of your 1200 USD to EUR and JPY:
+
+- **EUR**: 1200 USD is equivalent to **1089.53 EUR**.
+- **JPY**: 1200 USD is equivalent to **191,520.00 JPY**.
+
+Please note that currency rates can fluctuate, so these conversions are based on the rates provided.
+

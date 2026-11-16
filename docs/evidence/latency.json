@@ -1,0 +1,207 @@
+{
+  "question": "Convert 250 USD to EUR and JPY",
+  "runs": 10,
+  "cold": {
+    "ok": 10,
+    "card_s": {
+      "n": 10,
+      "median": 1.758,
+      "min": 1.607,
+      "max": 2.365
+    },
+    "message_s": {
+      "n": 10,
+      "median": 1.876,
+      "min": 1.668,
+      "max": 2.065
+    }
+  },
+  "warm": {
+    "ok": 10,
+    "card_s": {
+      "n": 10,
+      "median": 0.244,
+      "min": 0.214,
+      "max": 0.254
+    },
+    "message_s": {
+      "n": 10,
+      "median": 1.687,
+      "min": 1.51,
+      "max": 1.81
+    }
+  },
+  "sign_ms": {
+    "n": 42,
+    "median": 0.414,
+    "min": 0.3,
+    "max": 1.129
+  },
+  "runtime_arn": "arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b",
+  "raw": {
+    "cold": [
+      {
+        "card_s": 2.3577,
+        "message_s": 1.8904,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"6382490d-d024-43cb-9f69-e5e25df66c27\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"ded1ce6d-1592-48a4-839a-032da4490660\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the converted amount from 250 USD to EUR and JPY:\\n\\n- To Euros (EUR): 226.98 EUR\\n- To Japanese Yen (JPY): 39,900.00 JPY\\n\\nPlease note that currency exchange rates fluctuate, so the actual amounts may vary at the time of your conversion.\\n\"}]}],\"contextId\":\"6ff2f929-8a24-40b5-8027-f397574f0cab\",\"history\":[{\"contextId\":\"6ff2f929-8a24-40b5-8027-f397574f0cab\",\"kind\":\"message\",\"messageId\":\"c9695294"
+      },
+      {
+        "card_s": 1.8969,
+        "message_s": 2.0647,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"d4cc9c0f-5b1f-40b3-90b6-6fb64f6ed214\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"bff05504-0b33-4781-9cf9-c9667346d77f\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the result of converting 250 USD to EUR and JPY:\\n\\n- **To EUR**: 250 USD is equivalent to **226.98 EUR**.\\n- **To JPY**: 250 USD is equivalent to **39,900.00 JPY**.\\n\\nThese conversions are based on the exchange rates as of November 16, 2026.\\n\"}]}],\"contextId\":\"ed21c41d-187a-4b3d-89a4-610ef3e2cb34\",\"history\":[{\"contextId\":\"ed21c41d-187a-4b3d-89a4-610ef3e2cb34\",\"kind\":\"message\",\"messageId\":\"fbcc"
+      },
+      {
+        "card_s": 1.7443,
+        "message_s": 1.8008,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"1deef95b-d589-4d85-ada0-31f15a561c6d\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"211d5b41-301c-45c3-9982-8ae8adda4c04\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the conversion result for 250 USD:\\n\\n- **To EUR**: \\n  - Conversion rate: 0.90794\\n  - Converted amount: 226.98 EUR\\n\\n- **To JPY**:\\n  - Conversion rate: 159.6\\n  - Converted amount: 39,900.00 JPY\\n\\nThe conversion rates and amounts are based on the latest available rates as of November 16, 2026.\\n\"}]}],\"contextId\":\"349892a0-3583-49f6-908b-ca17f2857933\",\"history\":[{\"contextId\":\"349892a0-3583-49"
+      },
+      {
+        "card_s": 1.6466,
+        "message_s": 1.6684,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"48a7aa2b-9e08-4e1a-b0ad-d273423975aa\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"1a4592f6-3775-4b77-8618-e96475ad86ab\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the result of converting 250 USD:\\n\\n- To EUR: 250 USD is equivalent to 226.98 EUR\\n- To JPY: 250 USD is equivalent to 39,900.00 JPY\\n\\nPlease note that the rates are based on the date 2026-11-16.\\n\"}]}],\"contextId\":\"169972f9-a1d1-4a9a-8ff4-369da0850c07\",\"history\":[{\"contextId\":\"169972f9-a1d1-4a9a-8ff4-369da0850c07\",\"kind\":\"message\",\"messageId\":\"66dd7e95-136a-4ef4-a348-89b2fdc2a040\",\"parts\":[{\"ki"
+      },
+      {
+        "card_s": 1.6074,
+        "message_s": 1.8611,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"f73e0c88-5829-4a60-a52e-3958aa080a4e\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"1f8393fe-2b88-4bd6-90d9-0f0e62ba5655\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the conversion result for 250 USD:\\n\\n- To EUR: 250 USD is equivalent to 226.98 EUR\\n- To JPY: 250 USD is equivalent to 39,900.00 JPY\\n\\nPlease note that the rates are based on the date 2026-11-16.\\n\"}]}],\"contextId\":\"ef2d09ba-529c-418e-b36e-d88107148b38\",\"history\":[{\"contextId\":\"ef2d09ba-529c-418e-b36e-d88107148b38\",\"kind\":\"message\",\"messageId\":\"2358bc7d-79a5-4a20-9f88-51e5a3613ba6\",\"parts\":[{\"k"
+      },
+      {
+        "card_s": 1.7001,
+        "message_s": 1.9387,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"b2e328af-dbb9-46d7-a8da-28f9eac4c1c3\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"a0906788-9de8-49e8-a183-ac60b4661eb3\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"The conversion of 250 USD to EUR and JPY results in the following amounts:\\n\\n- To Euros (EUR): 250 USD is equivalent to 226.98 EUR\\n- To Japanese Yen (JPY): 250 USD is equivalent to 39,900.00 JPY\\n\\nPlease note that currency exchange rates can fluctuate, so it's always a good idea to check the rates closer to the time of your transaction.\\n\"}]}],\"contextId\":\"f9354460-88bf-48ba-8ec7-7927764b37d5\",\"histor"
+      },
+      {
+        "card_s": 2.3653,
+        "message_s": 1.7025,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"db9bff41-1416-4d55-bdef-6829cccd0327\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"36973506-2f18-47c7-aa8a-0e8218a3b0a6\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here are the converted amounts:\\n\\n- **EUR**: 226.98 EUR\\n- **JPY**: 39,900.00 JPY\\n\\nThese conversions are based on the provided amount of 250 USD, with the source currency being USD. The conversion rates and dates are included for reference.\\n\"}]}],\"contextId\":\"91cbd189-df1f-442f-a4d7-22d8fff79a09\",\"history\":[{\"contextId\":\"91cbd189-df1f-442f-a4d7-22d8fff79a09\",\"kind\":\"message\",\"messageId\":\"7f335194-a82"
+      },
+      {
+        "card_s": 2.0085,
+        "message_s": 1.9846,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"f0a8a849-f1ae-4313-b10b-1b64af15d87c\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"d940029d-4c09-4b3b-934e-d84fb74116d6\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the conversion of 250 USD to EUR and JPY:\\n\\n- To Euros (EUR): 250 USD is equivalent to 226.98 EUR.\\n- To Japanese Yen (JPY): 250 USD is equivalent to 39,900.00 JPY.\\n\\nPlease note that these rates are based on the conversion rate as of the date 2026-11-16. The actual amount might vary slightly depending on the current exchange rates.\\n\"}]}],\"contextId\":\"677190ea-9e45-4ef7-8b41-eb7c73d438ab\",\"his"
+      },
+      {
+        "card_s": 1.6606,
+        "message_s": 1.7448,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"165942d1-50eb-4e60-b3a3-63fd06f0d686\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"12a1e6fb-109b-4d07-9ff7-d702256b1986\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"The conversion results are as follows:\\n\\n- 250 USD is equivalent to 226.98 EUR\\n- 250 USD is equivalent to 39,900.00 JPY\\n\\nThese rates are as of November 16, 2026.\\n\"}]}],\"contextId\":\"a41ace93-9c3c-4dd9-8df8-d4617751204f\",\"history\":[{\"contextId\":\"a41ace93-9c3c-4dd9-8df8-d4617751204f\",\"kind\":\"message\",\"messageId\":\"e305fc57-41ec-45f9-8d92-dc6187a0a9cf\",\"parts\":[{\"kind\":\"text\",\"text\":\"Convert 250 USD to E"
+      },
+      {
+        "card_s": 1.7723,
+        "message_s": 1.9448,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"0f1f50d1-7ec3-4b92-bfef-a2651be36527\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"0d54de89-24d7-45f4-b045-e4541e091ea1\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"The converted amounts are as follows:\\n- 250 USD to EUR: 226.98 EUR\\n- 250 USD to JPY: 39,900.00 JPY\\n\\nPlease note that the conversion rates are based on the rate date of 2026-11-16.\\n\"}]}],\"contextId\":\"f568a32c-f2cb-4c59-8867-9450cb5886b3\",\"history\":[{\"contextId\":\"f568a32c-f2cb-4c59-8867-9450cb5886b3\",\"kind\":\"message\",\"messageId\":\"2450c21c-81cb-4061-b480-397339c6bb7d\",\"parts\":[{\"kind\":\"text\",\"text\":\"Co"
+      }
+    ],
+    "warm": [
+      {
+        "card_s": 0.2432,
+        "message_s": 1.7647,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"7b591ecc-f58b-46d0-8e05-d8f95a2d549b\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"acd6e81d-6d93-4091-9fb1-57141931465f\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here are the conversion results:\\n\\n- 250 USD to EUR: 226.98 EUR\\n- 250 USD to JPY: 39,900.00 JPY\\n\\nPlease note that currency exchange rates fluctuate frequently.\\n\"}]}],\"contextId\":\"8acced9e-2ba9-4d96-a238-cd4d2fe6397c\",\"history\":[{\"contextId\":\"8acced9e-2ba9-4d96-a238-cd4d2fe6397c\",\"kind\":\"message\",\"messageId\":\"3e108216-380d-4244-846b-aee473dcb05e\",\"parts\":[{\"kind\":\"text\",\"text\":\"Convert 250 USD to EUR"
+      },
+      {
+        "card_s": 0.2467,
+        "message_s": 1.7299,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"ca0f5d10-a357-4b6e-88b3-509ee06079c4\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"06334dcc-ba55-42a6-bc3d-b77c54fe65e3\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"The conversion of 250 USD to EUR and JPY is as follows:\\n\\n- To Euros (EUR): 250 USD is equivalent to 226.98 EUR\\n- To Japanese Yen (JPY): 250 USD is equivalent to 39,900.00 JPY\\n\\nPlease note that the rates are based on the date of conversion, which is November 16, 2026 in this case.\\n\"}]}],\"contextId\":\"92738336-00eb-4616-a5fa-99bbd703c8b5\",\"history\":[{\"contextId\":\"92738336-00eb-4616-a5fa-99bbd703c8b5\","
+      },
+      {
+        "card_s": 0.214,
+        "message_s": 1.7762,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"4fdd6c6b-90ab-40ab-b893-00c4dc343f93\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"f77eb53f-3bff-4545-84b7-b550101b7a5e\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here are the conversion results for 250 USD:\\n\\n- To **EUR**: 250 USD is equivalent to **226.98 EUR**\\n- To **JPY**: 250 USD is equivalent to **39,900.00 JPY**\\n\\nPlease note the rates are as of the conversion date provided in the result.\\n\"}]}],\"contextId\":\"449a9a8a-dd33-440c-aec2-fae44ffedeb2\",\"history\":[{\"contextId\":\"449a9a8a-dd33-440c-aec2-fae44ffedeb2\",\"kind\":\"message\",\"messageId\":\"86c43caf-0a94-488"
+      },
+      {
+        "card_s": 0.2356,
+        "message_s": 1.8101,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"d609960b-5422-4c59-8ea2-fb8e083b7238\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"022edb32-217e-4905-8134-e2555871b1f4\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"The conversion of 250 USD to EUR and JPY is as follows:\\n\\n- **EUR**: 250 USD is equivalent to 226.98 EUR.\\n- **JPY**: 250 USD is equivalent to 39,900.00 JPY.\\n\\nPlease note that the rates are effective as of November 16, 2026.\\n\"}]}],\"contextId\":\"7f78bb5e-218b-4659-8580-9e907f7217da\",\"history\":[{\"contextId\":\"7f78bb5e-218b-4659-8580-9e907f7217da\",\"kind\":\"message\",\"messageId\":\"9a49ac71-5c5f-429a-85e2-30f0"
+      },
+      {
+        "card_s": 0.2468,
+        "message_s": 1.5923,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"dc2443c6-c91b-48e6-b49a-9c10cabc47d6\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"6553606a-7c32-4eeb-bca9-41cc4556edc1\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"The converted amounts are as follows:\\n- 250 USD to EUR: 226.98 EUR\\n- 250 USD to JPY: 39,900.00 JPY\\n\\nPlease note that the rates and converted amounts are based on the current exchange rate on November 16, 2026.\\n\"}]}],\"contextId\":\"4b6d43b6-0a5d-463c-9620-495c3dee14b3\",\"history\":[{\"contextId\":\"4b6d43b6-0a5d-463c-9620-495c3dee14b3\",\"kind\":\"message\",\"messageId\":\"ad7afa7d-f76a-4876-a963-1a865c07f246\",\"par"
+      },
+      {
+        "card_s": 0.254,
+        "message_s": 1.7002,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"56c85393-94a9-49d4-a5cb-100979186631\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"f2e3f161-5dd5-4110-a7bc-ae0f5b25cce9\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here are the conversion results for 250 USD to EUR and JPY:\\n\\n- To EUR: The conversion rate is 0.90794, so 250 USD is equivalent to 226.98 EUR.\\n- To JPY: The conversion rate is 159.6, so 250 USD is equivalent to 39,900.00 JPY.\\n\\nPlease note that the rates are effective as of November 16, 2026.\\n\"}]}],\"contextId\":\"898bb142-390d-4f5b-8310-6570680c1a99\",\"history\":[{\"contextId\":\"898bb142-390d-4f5b-8310-65"
+      },
+      {
+        "card_s": 0.2457,
+        "message_s": 1.6612,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"1c316406-d9b4-47ff-98a3-eae2fa79cf5c\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"05325db0-6668-4141-b5fa-7d7bdfe1b3f7\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the conversion of 250 USD to EUR and JPY:\\n\\n- **To EUR:** 250 USD is equivalent to 226.98 EUR.\\n- **To JPY:** 250 USD is equivalent to 39,900.00 JPY.\\n\\nPlease note that currency conversion rates may fluctuate, and the above rates are based on the date mentioned in the conversion result (2026-11-16).\\n\"}]}],\"contextId\":\"ac526473-2f3d-4ebf-95e8-babb0f3cb03b\",\"history\":[{\"contextId\":\"ac526473-2f3d"
+      },
+      {
+        "card_s": 0.2398,
+        "message_s": 1.5101,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"18df28ea-2d53-4a8c-91b2-63000d86e35a\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"44046957-920a-41a0-83a4-b64172137217\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the conversion result for 250 USD:\\n\\n- To EUR: 250 USD converts to 226.98 EUR\\n- To JPY: 250 USD converts to 39,900.00 JPY\\n\\nPlease note that exchange rates can fluctuate, so it's always good to check the latest rates for the most accurate conversion.\\n\"}]}],\"contextId\":\"e4a44c8e-94d3-4c78-b56d-cf75f89c3330\",\"history\":[{\"contextId\":\"e4a44c8e-94d3-4c78-b56d-cf75f89c3330\",\"kind\":\"message\",\"messag"
+      },
+      {
+        "card_s": 0.2493,
+        "message_s": 1.6086,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"76b0535f-d5a9-46fe-9874-140a37f5a12e\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"eb7fa2e8-9666-4636-9def-36bf4c76b223\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here is the conversion of 250 USD to EUR and JPY:\\n\\n- To EUR: 250 USD is equivalent to 226.98 EUR.\\n- To JPY: 250 USD is equivalent to 39,900.00 JPY.\\n\\nThese rates are based on the conversion rate date of November 16, 2026.\\n\"}]}],\"contextId\":\"3bbec369-f222-450e-b3d8-c7d94a490983\",\"history\":[{\"contextId\":\"3bbec369-f222-450e-b3d8-c7d94a490983\",\"kind\":\"message\",\"messageId\":\"0ffd724b-1bed-4246-ae09-bae48c"
+      },
+      {
+        "card_s": 0.2372,
+        "message_s": 1.673,
+        "card_status": 200,
+        "message_status": 200,
+        "ok": true,
+        "body": "{\"id\":\"0aed7235-40db-4568-9226-fc0f6fb65399\",\"jsonrpc\":\"2.0\",\"result\":{\"artifacts\":[{\"artifactId\":\"f8216362-a2ac-4a94-998d-8d3827ecb204\",\"name\":\"agent_response\",\"parts\":[{\"kind\":\"text\",\"text\":\"Here are the converted amounts:\\n\\n- **USD 250.00** to **EUR**: \u20ac226.98\\n- **USD 250.00** to **JPY**: \u00a539,900.00\\n\\nThe conversion rates were applied as of November 16, 2026.\\n\"}]}],\"contextId\":\"ddb9d189-ef95-4749-9f1d-45ac239e360b\",\"history\":[{\"contextId\":\"ddb9d189-ef95-4749-9f1d-45ac239e360b\",\"kind\":\"message\",\"messageId\":\"c703e12e-c517-43b8-b61e-386ad5281c51\",\"parts\":[{\"kind\":\"text\",\"text\":\"Convert 250"
+      }
+    ]
+  }
+}

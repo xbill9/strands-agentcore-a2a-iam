@@ -1,0 +1,172 @@
+{
+  "tests": {
+    "cold_vs_warm_card_s": {
+      "test": "Mann-Whitney U, two-sided (independent runs)",
+      "n_cold": 10,
+      "n_warm": 10,
+      "U": 100.0,
+      "p_value": 0.00018267179110955002,
+      "p_value_3sf": 0.000183,
+      "conclusion": "HOLDS"
+    },
+    "cold_vs_warm_message_s": {
+      "test": "Mann-Whitney U, two-sided (independent runs)",
+      "n_cold": 10,
+      "n_warm": 10,
+      "U": 86.0,
+      "p_value": 0.00728455700947966,
+      "p_value_3sf": 0.00728,
+      "conclusion": "HOLDS"
+    },
+    "session_409_same_vs_separate": {
+      "test": "Fisher exact, two-sided, unit = pair",
+      "same": "5/5",
+      "separate": "0/5",
+      "same_in_words": "5 of 5 pairs",
+      "separate_in_words": "0 of 5 pairs",
+      "p_value": 0.007936507936507938,
+      "p_value_3sf": 0.00794,
+      "wilson_95_same_pct": [
+        56.55,
+        100.0
+      ],
+      "wilson_95_separate_pct": [
+        0.0,
+        43.45
+      ],
+      "wilson_95_same_pct_1dp": [
+        56.6,
+        100.0
+      ],
+      "wilson_95_separate_pct_1dp": [
+        0.0,
+        43.4
+      ],
+      "wilson_source": "research-audit MCP verify_wilson_ci",
+      "conclusion": "HOLDS"
+    },
+    "boundary_status_counts": {
+      "cases": 10,
+      "allowed_200": 2,
+      "refused_403": 8,
+      "p_value": 0.0,
+      "conclusion": "counted"
+    }
+  },
+  "claims": [
+    {
+      "id": "cold-card_s",
+      "statement": "cold card latency, seconds, median [min, max] over 10 runs",
+      "paper_value": {
+        "median": 1.758,
+        "min": 1.607,
+        "max": 2.365,
+        "n": 10
+      },
+      "paper_source": "latency.json .cold.card_s",
+      "computed": {
+        "median": 1.758,
+        "min": 1.607,
+        "max": 2.365,
+        "n": 10
+      },
+      "verdict": "VERIFIED",
+      "reason": "recomputed from .raw"
+    },
+    {
+      "id": "cold-message_s",
+      "statement": "cold message latency, seconds, median [min, max] over 10 runs",
+      "paper_value": {
+        "median": 1.876,
+        "min": 1.668,
+        "max": 2.065,
+        "n": 10
+      },
+      "paper_source": "latency.json .cold.message_s",
+      "computed": {
+        "median": 1.876,
+        "min": 1.668,
+        "max": 2.065,
+        "n": 10
+      },
+      "verdict": "VERIFIED",
+      "reason": "recomputed from .raw"
+    },
+    {
+      "id": "warm-card_s",
+      "statement": "warm card latency, seconds, median [min, max] over 10 runs",
+      "paper_value": {
+        "median": 0.244,
+        "min": 0.214,
+        "max": 0.254,
+        "n": 10
+      },
+      "paper_source": "latency.json .warm.card_s",
+      "computed": {
+        "median": 0.244,
+        "min": 0.214,
+        "max": 0.254,
+        "n": 10
+      },
+      "verdict": "VERIFIED",
+      "reason": "recomputed from .raw"
+    },
+    {
+      "id": "warm-message_s",
+      "statement": "warm message latency, seconds, median [min, max] over 10 runs",
+      "paper_value": {
+        "median": 1.687,
+        "min": 1.51,
+        "max": 1.81,
+        "n": 10
+      },
+      "paper_source": "latency.json .warm.message_s",
+      "computed": {
+        "median": 1.687,
+        "min": 1.51,
+        "max": 1.81,
+        "n": 10
+      },
+      "verdict": "VERIFIED",
+      "reason": "recomputed from .raw"
+    },
+    {
+      "id": "session-409-same",
+      "statement": "pairs on one session with a 409",
+      "paper_value": {
+        "pairs": 5
+      },
+      "paper_source": "session.json .raw.same",
+      "computed": {
+        "pairs": 5
+      },
+      "verdict": "VERIFIED",
+      "reason": "counted per pair"
+    },
+    {
+      "id": "session-409-separate",
+      "statement": "pairs on separate sessions with a 409",
+      "paper_value": {
+        "pairs": 0
+      },
+      "paper_source": "session.json .raw.separate",
+      "computed": {
+        "pairs": 0
+      },
+      "verdict": "VERIFIED",
+      "reason": "counted per pair"
+    },
+    {
+      "id": "sign-ms",
+      "statement": "SigV4 signing time per request, ms, median",
+      "paper_value": {
+        "median": 0.414,
+        "n": 42
+      },
+      "paper_source": "latency.json .sign_ms",
+      "computed": null,
+      "verdict": "NOT CHECKABLE",
+      "reason": "per-request signing times are summarised in the run and not kept raw"
+    }
+  ]
+}

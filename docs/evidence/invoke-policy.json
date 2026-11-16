@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeTheWorker",
+      "Effect": "Allow",
+      "Action": "bedrock-agentcore:InvokeAgentRuntime",
+      "Resource": [
+        "__RUNTIME_ARN__",
+        "__RUNTIME_ARN__/runtime-endpoint/*"
+      ]
+    },
+    {
+      "Sid": "ReadTheWorkerCard",
+      "Effect": "Allow",
+      "Action": "bedrock-agentcore:GetAgentCard",
+      "Resource": [
+        "__RUNTIME_ARN__",
+        "__RUNTIME_ARN__/runtime-endpoint/*"
+      ]
+    },
+    {
+      "Sid": "CoordinatorModel",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:*:__ACCOUNT__:inference-profile/us.amazon.nova-micro-v1:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-micro-v1:0"
+      ]
+    }
+  ]
+}
