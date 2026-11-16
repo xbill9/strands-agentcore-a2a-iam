@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Strands to Strands over A2A on Bedrock AgentCore, With IAM as the Only Credential</title>
+  <meta name="description" content="A Strands currency worker served over A2A on Amazon Bedrock AgentCore Runtime with IAM inbound auth, a SigV4-signed Strands caller and coordinator, a one-runtime IAM policy, and measured access checks, session latency and concurrency." />
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+    body{font-family:-apple-system,'Segoe UI',Roboto,'Liberation Sans',Arial,sans-serif;
+         font-size:18px;line-height:1.58;max-width:42em;color:#242424;}
+    h1,h2,h3,h4{font-weight:700;line-height:1.25;margin-top:1.8em;}
+    h4{font-size:1.25em;}
+    img{max-width:100%;height:auto;display:block;margin:1.6em 0;}
+    pre{background:#f7f7f7;border:1px solid #e6e6e6;border-radius:4px;
+        padding:12px 14px;overflow-x:auto;font-size:14px;line-height:1.45;}
+    code{font-family:'Liberation Mono',Menlo,Consolas,monospace;}
+    :not(pre)>code{background:#f2f2f2;padding:1px 5px;border-radius:3px;font-size:.9em;}
+    blockquote{border-left:3px solid #ddd;margin-left:0;padding-left:1em;color:#555;}
+    hr{border:0;border-top:1px solid #e6e6e6;margin:2.4em 0;}
+  </style>
+</head>
+<body>
+<p>This article provides a step by step guide to connecting two Strands
+agents over the Agent2Agent (A2A) protocol on Amazon Bedrock AgentCore
+Runtime, with AWS IAM as the only credential. The worker runs on
+AgentCore with IAM inbound auth, the caller signs every request with
+SigV4, and one IAM policy decides who may call it.</p>
+<figure><img src="https://raw.githubusercontent.com/xbill9/strands-agentcore-a2a-iam/main/docs/medium/img/devto-cover.85c749f0.jpg" alt="Strands to Strands over A2A on Bedrock AgentCore, With IAM as the Only Credential" /></figure>
+<p>Repository: <a
+href="https://github.com/xbill9/strands-agentcore-a2a-iam">https://github.com/xbill9/strands-agentcore-a2a-iam</a></p>
+<hr />
+<h4 id="what-is-a2a-on-agentcore">What Is A2A on AgentCore?</h4>
+<p>A2A is an open protocol for one agent to call another: the caller
+reads the other agent's card from
+<code>/.well-known/agent-card.json</code>, then sends JSON-RPC messages
+to it. AgentCore Runtime can host an A2A server and put it behind the
+AWS API front door.</p>
+<p>With IAM inbound auth turned on, every request to the agent, the card
+included, has to carry a SigV4 signature from an IAM identity that is
+allowed to call that runtime. No API key, no OAuth client and no shared
+secret is involved.</p>
+<hr />
+<h4 id="at-this-point-you-should-have">At This Point You Should
+Have</h4>
+<ul>
+<li>An AWS account with Amazon Bedrock model access to Amazon Nova Micro
+in <code>us-east-1</code></li>
+<li>The AWS CLI, version 2, signed in</li>
+<li><code>python3</code> and <code>node</code> with
+<code>npm</code></li>
+<li>The AgentCore CLI: <code>npm install -g @aws/agentcore</code></li>
+<li>The Python packages for the caller:
+<code>pip install 'strands-agents[a2a]' 'bedrock-agentcore[a2a]' boto3 httpx</code></li>
+</ul>
+<p>The benchmarks assume IAM roles. AWS does not let the root user
+assume a role, so they need an IAM user or an IAM Identity Center role.
+Step 6 covers it.</p>
+<hr />
+<h4 id="how-it-fits-together">How It Fits Together</h4>
+<pre class="text"><code>local machine                                      AWS, us-east-1
+-------------                                      --------------
+caller.ask / caller.coordinator (Strands)
+  A2AAgent  -- httpx + SigV4 (bedrock-agentcore) --&gt;  AgentCore Runtime, IAM inbound auth
+                                                        Strands worker, serve_a2a :9000
+                                                          convert_currency tool --&gt; frankfurter.dev
+  BedrockModel (coordinator only) -----------------&gt;  Amazon Bedrock, Nova Micro</code></pre>
+<p>One IAM identity signs both kinds of call. The coordinator's model
+call and its call to the worker use the same boto3 session.</p>
+<hr />
+<h4 id="step-1--scaffold-the-worker-with-iam-inbound-auth">Step 1 —
+Scaffold the Worker With IAM Inbound Auth</h4>
+<p>The AgentCore CLI has a template for a Strands agent served over A2A.
+The project file declares the runtime, its protocol and its
+authorizer:</p>
+<pre class="json"><code>{
+  &quot;name&quot;: &quot;agent&quot;,
+  &quot;build&quot;: &quot;CodeZip&quot;,
+  &quot;entrypoint&quot;: &quot;main.py&quot;,
+  &quot;codeLocation&quot;: &quot;app/agent&quot;,
+  &quot;runtimeVersion&quot;: &quot;PYTHON_3_14&quot;,
+  &quot;protocol&quot;: &quot;A2A&quot;,
+  &quot;envVars&quot;: [{ &quot;name&quot;: &quot;BEDROCK_MODEL_ID&quot;, &quot;value&quot;: &quot;us.amazon.nova-micro-v1:0&quot; }],
+  &quot;authorizerType&quot;: &quot;AWS_IAM&quot;
+}</code></pre>
+<p><code>"authorizerType": "AWS_IAM"</code> is the whole of the inbound
+auth setup. <code>BEDROCK_MODEL_ID</code> has to be an inference profile
+ID, with the <code>us.</code> or <code>global.</code> prefix.</p>
+<hr />
+<h4 id="step-2--do-the-arithmetic-in-the-tool">Step 2 — Do the
+Arithmetic in the Tool</h4>
+<p>The worker is one Strands agent with one tool. The tool fetches
+European Central Bank reference rates and does the multiplication with
+<code>Decimal</code>. The model picks the arguments and copies the
+tool's JSON into its answer.</p>
+<pre class="python"><code>@tool
+def convert_currency(amount: str, source: str, targets: list[str]) -&gt; str:
+    &quot;&quot;&quot;Convert an amount from one ISO 4217 currency to one or more others.&quot;&quot;&quot;
+    src = source.upper()
+    symbols = &quot;,&quot;.join(t.upper() for t in targets)
+    url = f&quot;{FRANKFURTER}?base={src}&amp;symbols={symbols}&quot;
+    with urllib.request.urlopen(url, timeout=10) as resp:
+        data = json.load(resp)
+    value = Decimal(amount)
+    return json.dumps({
+        &quot;source&quot;: src, &quot;amount&quot;: str(value), &quot;rate_date&quot;: data[&quot;date&quot;],
+        &quot;quotes&quot;: {
+            code: {&quot;rate&quot;: str(rate),
+                   &quot;converted&quot;: str((value * Decimal(str(rate))).quantize(Decimal(&quot;0.01&quot;)))}
+            for code, rate in data[&quot;rates&quot;].items()
+        },
+    })</code></pre>
+<p><code>serve_a2a</code> from <code>bedrock_agentcore.runtime</code>
+serves it on port 9000, which is the AgentCore A2A contract:</p>
+<pre class="python"><code>serve_a2a(StrandsA2AExecutor(agent_factory=create_agent))</code></pre>
+<hr />
+<h4 id="step-3--deploy-and-read-back-the-runtime-arn">Step 3 — Deploy
+and Read Back the Runtime ARN</h4>
+<p>The CDK app under <code>agentcore/cdk</code> needs its packages once
+per clone. Then deploy, and read the ARN from <code>status</code>:</p>
+<pre class="bash"><code>cd strandsiam/agentcore/cdk &amp;&amp; npm ci &amp;&amp; cd ../..
+agentcore deploy --yes --region us-east-1
+agentcore status --region us-east-1 --json
+deploying AgentCore-strandsiam-default (usually takes a few minutes)
+deployed project &#39;strandsiam&#39; to target &#39;default&#39;
+{
+  &quot;resourceType&quot;: &quot;runtime&quot;,
+  &quot;name&quot;: &quot;agent&quot;,
+  &quot;deploymentState&quot;: &quot;deployed&quot;,
+  &quot;arn&quot;: &quot;arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b&quot;
+}</code></pre>
+<p>Everything after this step reads that ARN from one environment
+variable:</p>
+<pre class="bash"><code>export WORKER_RUNTIME_ARN=arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b</code></pre>
+<hr />
+<h4 id="step-4--sign-every-request-with-sigv4">Step 4 — Sign Every
+Request With SigV4</h4>
+<p>The A2A endpoint is a regular AWS API endpoint, so the caller signs
+each HTTP request for the <code>bedrock-agentcore</code> service.
+<code>caller/sigv4.py</code> is an <code>httpx.Auth</code> that does it
+with botocore's signer:</p>
+<pre class="python"><code>SERVICE = &quot;bedrock-agentcore&quot;
+SESSION_HEADER = &quot;X-Amzn-Bedrock-AgentCore-Runtime-Session-Id&quot;
+_SIGNED = {&quot;host&quot;, &quot;content-type&quot;, SESSION_HEADER.lower()}
+ 
+class SigV4(httpx.Auth):
+    requires_request_body = True
+ 
+    def auth_flow(self, request: httpx.Request):
+        creds = self._session.get_credentials().get_frozen_credentials()
+        headers = {k: v for k, v in request.headers.items() if k.lower() in _SIGNED}
+        aws_request = AWSRequest(method=request.method, url=str(request.url),
+                                 data=request.content, headers=headers)
+        _BotoSigV4(creds, self._service, self._region).add_auth(aws_request)
+        for name in (&quot;Authorization&quot;, &quot;X-Amz-Date&quot;, &quot;X-Amz-Security-Token&quot;):
+            if name in aws_request.headers:
+                request.headers[name] = aws_request.headers[name]
+        yield request</code></pre>
+<p>Three details decide whether a signature is accepted:</p>
+<ul>
+<li><strong>Sign only stable headers.</strong> httpx adds and rewrites
+headers after the auth hook runs, so the signer covers
+<code>host</code>, <code>content-type</code> and the session
+header.</li>
+<li><strong><code>requires_request_body = True</code></strong>, so the
+JSON body is available to hash.</li>
+<li><strong>The URL holds the whole ARN, percent-encoded, with a
+trailing slash:</strong></li>
+</ul>
+<pre class="python"><code>def runtime_url(runtime_arn: str, region: str) -&gt; str:
+    return (
+        f&quot;https://bedrock-agentcore.{region}.amazonaws.com&quot;
+        f&quot;/runtimes/{quote(runtime_arn, safe=&#39;&#39;)}/invocations/&quot;
+    )</code></pre>
+<p>The session header picks the runtime session. AgentCore requires at
+least 33 characters, and a UUID4 has 36.</p>
+<hr />
+<h4 id="step-5--wrap-the-worker-as-a-strands-a2aagent">Step 5 — Wrap the
+Worker as a Strands A2AAgent</h4>
+<p>Strands has an <code>A2AAgent</code> that speaks A2A to a remote
+agent. Hand it the signed httpx client and the remote worker looks like
+any other agent:</p>
+<pre class="python"><code>def remote_worker(session: boto3.Session | None = None, session_id: str | None = None):
+    arn, region = settings()
+    session = session or boto3.Session(region_name=region)
+    http, signer = signed_client(session, region, session_id)
+    agent = A2AAgent(
+        endpoint=runtime_url(arn, region),
+        client_config=ClientConfig(httpx_client=http),
+    )
+    return agent, http, signer</code></pre>
+<p><code>signed_client</code> pins one session ID on the client, so
+every call from one <code>A2AAgent</code> lands in the same runtime
+session.</p>
+<hr />
+<h4 id="step-6--write-the-policy-two-actions-two-resources">Step 6 —
+Write the Policy: Two Actions, Two Resources</h4>
+<p>The caller needs two actions.
+<code>bedrock-agentcore:InvokeAgentRuntime</code> sends a message, and
+<code>bedrock-agentcore:GetAgentCard</code> reads the card.
+<code>A2AAgent</code> reads the card before its first message, so a
+policy without <code>GetAgentCard</code> stops the caller before it
+sends anything.</p>
+<pre class="json"><code>{
+  &quot;Sid&quot;: &quot;InvokeTheWorker&quot;,
+  &quot;Effect&quot;: &quot;Allow&quot;,
+  &quot;Action&quot;: &quot;bedrock-agentcore:InvokeAgentRuntime&quot;,
+  &quot;Resource&quot;: [&quot;__RUNTIME_ARN__&quot;, &quot;__RUNTIME_ARN__/runtime-endpoint/*&quot;]
+},
+{
+  &quot;Sid&quot;: &quot;ReadTheWorkerCard&quot;,
+  &quot;Effect&quot;: &quot;Allow&quot;,
+  &quot;Action&quot;: &quot;bedrock-agentcore:GetAgentCard&quot;,
+  &quot;Resource&quot;: [&quot;__RUNTIME_ARN__&quot;, &quot;__RUNTIME_ARN__/runtime-endpoint/*&quot;]
+}</code></pre>
+<p><code>iam/setup_roles.sh</code> fills in the ARN and creates three
+roles from it: <code>speedrun-caller-invoke</code> with the policy above
+plus Bedrock <code>InvokeModel</code> for Nova Micro,
+<code>speedrun-caller-runtime-only</code> with both actions on the bare
+runtime ARN only, and <code>speedrun-caller-none</code> with no
+permissions.</p>
+<pre class="bash"><code>iam/setup_roles.sh</code></pre>
+<p>The trust policy names the identity that ran the script. AWS answers
+the root user with this:</p>
+<pre class="text"><code>An error occurred (AccessDenied) when calling the AssumeRole operation: Roles may not be assumed by root accounts.</code></pre>
+<p>From a root login, create an IAM user that may only assume these
+roles and point the trust at it:</p>
+<pre class="bash"><code>CALLER_PRINCIPAL=arn:aws:iam::ACCOUNT_ID:user/speedrun-operator iam/setup_roles.sh</code></pre>
+<hr />
+<h4 id="mag_right-tip-the-endpoint-is-a-resource-too">🔎 Tip: The
+Endpoint Is a Resource Too</h4>
+<p>A policy that names only the runtime ARN looks complete and is
+refused. The runtime-only role has both actions on the bare ARN, and AWS
+checks each action against the runtime's <code>DEFAULT</code> endpoint
+as well:</p>
+<pre class="text"><code>not authorized to perform: bedrock-agentcore:GetAgentCard on resource:
+  arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b/runtime-endpoint/DEFAULT
+not authorized to perform: bedrock-agentcore:InvokeAgentRuntime on resource:
+  arn:aws:bedrock-agentcore:us-east-1:ACCOUNT_ID:runtime/strandsiam_default_agent-lv6O7Y6g5b/runtime-endpoint/DEFAULT</code></pre>
+<p>Grant both actions on <code>&lt;runtime ARN&gt;</code> and
+<code>&lt;runtime ARN&gt;/runtime-endpoint/*</code>. The policy still
+names one runtime and nothing else.</p>
+<hr />
+<h4 id="step-7--ask-the-worker">Step 7 — Ask the Worker</h4>
+<p><code>caller.ask</code> reads the card, sends one message, and
+reports how many requests it signed. Run under
+<code>speedrun-caller-invoke</code>:</p>
+<pre class="bash"><code>python3 -m caller.ask &quot;Convert 250 USD to EUR and JPY&quot;
+card: name=&#39;agent&#39; url=https://bedrock-agentcore.us-east-1.amazonaws.com/runtimes/arn%3Aaws%3Abedrock-agentcore%3Aus-east-1%3AACCOUNT_ID%3Aruntime%2Fstrandsiam_default_agent-lv6O7Y6g5b/invocations  (2.21 s)
+answer (1.50 s):
+Here is the result of your currency conversion:
+ 
+- **250 USD** converts to **226.98 EUR**
+- **250 USD** converts to **39,900.00 JPY**
+ 
+The conversion rates are based on the date November 16, 2026.
+ 
+signed 2 requests, 2.27 ms signing in total</code></pre>
+<p>Two requests, the card and the message, took 2.27 ms of signing
+between them.</p>
+<hr />
+<h4 id="step-8--let-a-strands-coordinator-delegate">Step 8 — Let a
+Strands Coordinator Delegate</h4>
+<p><code>caller.coordinator</code> is a local Strands agent on Nova
+Micro with one tool, <code>ask_currency_worker</code>, which calls the
+remote worker through the <code>A2AAgent</code> from Step 5:</p>
+<pre class="python"><code>worker, http, _ = remote_worker()
+# Strands runs a turn&#39;s tool calls concurrently, but an AgentCore runtime
+# session takes one request at a time (a second one gets 409 Conflict).
+one_at_a_time = asyncio.Lock()
+ 
+@tool
+async def ask_currency_worker(request: str) -&gt; str:
+    &quot;&quot;&quot;Ask the remote currency worker (Strands on AgentCore, over A2A).&quot;&quot;&quot;
+    async with one_at_a_time:
+        return str(await worker.invoke_async(request))
+python3 -m caller.coordinator &quot;I have 1200 USD. What is that in EUR and JPY?&quot;
+Here is the conversion of your 1200 USD to EUR and JPY:
+ 
+- **EUR**: 1200 USD is equivalent to **1089.53 EUR**.
+- **JPY**: 1200 USD is equivalent to **191,520.00 JPY**.</code></pre>
+<p>Run under <code>speedrun-caller-invoke</code>, the same role signed
+the Bedrock model calls and the A2A calls.</p>
+<hr />
+<h4 id="mag_right-tip-one-request-at-a-time-per-runtime-session">🔎 Tip:
+One Request at a Time per Runtime Session</h4>
+<p>A model that answers "EUR and JPY" with two tool calls makes Strands
+run both at once. Both reach the worker on the same session ID, and
+AgentCore runs one request per session at a time. The second one gets
+HTTP 409:</p>
+<pre class="json"><code>{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;error&quot;:{&quot;code&quot;:-32054,&quot;message&quot;:&quot;Session operation in progress, please retry&quot;}}</code></pre>
+<p><code>bench/session.py</code> measures it. It sends two messages at
+the same moment, five times on one shared session and five times on two
+separate sessions:</p>
+<pre class="bash"><code>python3 -m bench.session --pairs 5
+same      5 pairs: {&#39;200&#39;: 5, &#39;409&#39;: 5}
+separate  5 pairs: {&#39;200&#39;: 10}</code></pre>
+<p>Every shared-session pair had one 409. No separate-session pair had
+one. Counted per pair, that is 5 of 5 against 0 of 5, two-sided Fisher's
+exact test p = 0.00794, with 95% Wilson intervals of [56.6%, 100.0%] and
+[0.0%, 43.4%].</p>
+<p>The coordinator's lock sends the worker calls one after another on
+one warm session. A new session per parallel call is the other option,
+and Step 10 shows what that costs.</p>
+<hr />
+<h4 id="step-9--test-the-boundary">Step 9 — Test the Boundary</h4>
+<p><code>bench.boundary</code> makes one raw call per identity and
+request shape, and records the status and body exactly as AWS returned
+them:</p>
+<pre class="bash"><code>python3 -m bench.boundary</code></pre>
+<p><img src="https://raw.githubusercontent.com/xbill9/strands-agentcore-a2a-iam/main/docs/medium/img/devto-strands-a2a-iam-table-1.png"
+alt="Table: Caller, Request, Status, AWS says" /></p>
+<p>Of 10 calls, 2 were allowed and 8 were refused. Each refusal names
+the action and the resource it was checked against, which makes a policy
+fix a one-line change.</p>
+<hr />
+<h4 id="step-10--measure-session-latency">Step 10 — Measure Session
+Latency</h4>
+<p><code>bench.latency</code> times a card read and a message, signed as
+<code>speedrun-caller-invoke</code>, ten times on a new session ID each
+time (cold) and ten times on one reused session ID (warm):</p>
+<pre class="bash"><code>python3 -m bench.latency --runs 10</code></pre>
+<p><img src="https://raw.githubusercontent.com/xbill9/strands-agentcore-a2a-iam/main/docs/medium/img/devto-strands-a2a-iam-table-2.png"
+alt="Table: Session, Card, median, Card, range, Message, median, Message, range" /></p>
+<p>Both gaps are bigger than the run-to-run noise. A two-sided
+Mann-Whitney U test on the ten cold and ten warm runs gives p = 0.000183
+for the card and p = 0.00728 for the message.</p>
+<p>A new session pays its start-up on the first request, here the card
+read. The message includes a Nova Micro call and a rates lookup on both
+sides, so the session start is a smaller share of it.</p>
+<hr />
+<h4 id="compare-and-contrast-one-session-or-one-per-call">Compare and
+Contrast: One Session or One per Call?</h4>
+<p><img src="https://raw.githubusercontent.com/xbill9/strands-agentcore-a2a-iam/main/docs/medium/img/devto-strands-a2a-iam-table-3.png"
+alt="Table: One session, calls one at a time, New session per call" /></p>
+<hr />
+<h4 id="so-which-one">So, Which One?</h4>
+<p>For one conversation, keep one session and send its calls one after
+another. That is what the coordinator does: a lock around the worker
+tool, one <code>A2AAgent</code>, one session ID.</p>
+<p>For independent work that has to run in parallel, give each branch
+its own session ID and accept the start-up on its first request.</p>
+<hr />
+<h4 id="teardown">Teardown</h4>
+<p><code>agentcore deploy --help</code> says the CLI removes the
+target's stack when the project declares nothing to deploy. Empty the
+project, deploy, restore the project file, then delete the roles and
+their inline policies:</p>
+<pre class="bash"><code>cd strandsiam &amp;&amp; agentcore remove all --yes &amp;&amp; agentcore deploy --yes --region us-east-1
+git checkout -- agentcore/agentcore.json
+for r in speedrun-caller-invoke speedrun-caller-runtime-only; do
+  aws iam delete-role-policy --role-name &quot;$r&quot; --policy-name invoke-worker
+done
+for r in speedrun-caller-invoke speedrun-caller-runtime-only speedrun-caller-none; do
+  aws iam delete-role --role-name &quot;$r&quot;
+done</code></pre>
+<p>If you created an IAM user to assume the roles, delete its access
+keys, its inline policy and the user last.</p>
+<hr />
+<h4 id="summary">Summary</h4>
+<p>The goal of this article was to connect two Strands agents over A2A
+on Amazon Bedrock AgentCore Runtime with IAM as the only credential. The
+key to the solution was a SigV4 <code>httpx.Auth</code> handed to
+Strands' <code>A2AAgent</code>, and one IAM policy granting
+<code>InvokeAgentRuntime</code> and <code>GetAgentCard</code> on one
+runtime and its endpoints. The us-east-1 results were:</p>
+<ul>
+<li>🟢 One IAM role signed the caller's A2A calls and the coordinator's
+Bedrock calls, with no other credential anywhere.</li>
+<li>🟢 Of 10 boundary calls, 2 were allowed and 8 were refused, each
+refusal naming the action and resource.</li>
+<li>🟢 A reused session read the card in a median 0.244 s against 1.758
+s for a new one, p = 0.000183.</li>
+<li>❌ A policy on the bare runtime ARN alone is refused for both
+actions, at <code>runtime-endpoint/DEFAULT</code>.</li>
+<li>❌ Two requests at once on one session returned a 409 in 5 of 5
+pairs, and 0 of 5 on separate sessions.</li>
+<li>⚠️ The root user cannot assume the caller roles; the benchmarks run
+as an IAM user allowed only to assume them.</li>
+</ul>
+<p>Scope: one AgentCore runtime in us-east-1 on 2026-11-16, called from
+one machine. Latency is 10 cold and 10 warm runs, the session test 5
+pairs per mode, and the boundary test one call per case. The worker pins
+<code>strands-agents ~= 1.57.2</code>; the caller ran
+<code>strands-agents</code> 1.64.0, <code>a2a-sdk</code> 0.3.26,
+<code>botocore</code> 1.43.118 and <code>httpx</code> 0.28.1. The worker
+and the coordinator both use Amazon Nova Micro through the
+<code>us.amazon.nova-micro-v1:0</code> inference profile.</p>
+<p>The strategy for connecting Strands agents over A2A on AgentCore with
+IAM was validated with an incremental step by step approach.</p>
+<h4 id="references">References</h4>
+<ul>
+<li>Repository: <a
+href="https://github.com/xbill9/strands-agentcore-a2a-iam">https://github.com/xbill9/strands-agentcore-a2a-iam</a></li>
+<li>Amazon Bedrock AgentCore Developer Guide: <a
+href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html">https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html</a></li>
+<li>Strands Agents: <a
+href="https://strandsagents.com/">https://strandsagents.com/</a></li>
+<li>Agent2Agent protocol: <a
+href="https://a2a-protocol.org/">https://a2a-protocol.org/</a></li>
+<li>Signature Version 4 for API requests: <a
+href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html</a></li>
+<li>Frankfurter exchange rates API: <a
+href="https://frankfurter.dev/">https://frankfurter.dev/</a></li>
+</ul>
+</body>
+</html>
