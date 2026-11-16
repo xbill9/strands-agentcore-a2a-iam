@@ -43,6 +43,6 @@ Every figure in the article comes from these result files.
 
 - [ ] Builder Center profile complete: name, profile picture, bio
 - [ ] One badge unlocked: Conversation Starter, Valued Creator, Meaningful Contributor or Idea Influencer
-- [ ] Article published on Builder Center
+- [x] Article published on Builder Center
 - [ ] Submitted in the Speed Run Space
 - [ ] Pulse form completed

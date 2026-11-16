@@ -1,6 +1,6 @@
 devto_aws = https://dev.to/aws-builders/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential-19hp
-medium = PENDING
-builder = PENDING
-substack = PENDING
+medium = https://medium.com/@xbill999/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential-374e2edba687
+builder = https://builder.aws.com/content/3MCgrxHGYMJuGCP8aC9Ks07DQAC/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential
+substack = https://xbill9.substack.com/p/strands-to-strands-over-a2a-on-bedrock
 linkedin = PENDING
 repo = https://github.com/xbill9/strands-agentcore-a2a-iam
